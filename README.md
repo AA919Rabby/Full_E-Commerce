@@ -1,16 +1,40 @@
-# social_media
+# Full E-Commerce Flutter App
 
-A new Flutter project.
+A complete E-Commerce mobile application built with Flutter and Firebase with REST Api.
+This app includes product listing, cart system, authentication, and order management.
 
-## Getting Started
 
-This project is a starting point for a Flutter application.
+# Features
 
-A few resources to get you started if this is your first Flutter project:
+User Authentication (Login / Register / Google sign in)
+Product Listing
+Search & Category Filter
+Add to Cart
+Order Placement
+Order History
+Firebase Integration
+Clean & Responsive UI
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
 
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+
+# Tech Stack
+
+Flutter
+Dart
+Firebase Authentication
+Cloud Firestore
+GetX (State Management)
+Google Fonts
+
+
+
+# Author
+
+**Rabby Khan**
+Flutter Developer
+
+---
+
+## ⭐ Show Your Support
+
+If you like this project, please give it a ⭐ on GitHub!
