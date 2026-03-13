@@ -23,11 +23,11 @@ class _ProfileZoomState extends State<ProfileZoom> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.white,
+      backgroundColor: Colors.grey.shade300,
       appBar: AppBar(
         elevation: 0,
         scrolledUnderElevation: 0,
-        backgroundColor: Colors.white,
+        backgroundColor: Colors.grey.shade300,
         leading: InkWell(
             onTap: () => Get.back(),
             child: const Icon(Icons.arrow_back, color: Colors.black, size: 25)),

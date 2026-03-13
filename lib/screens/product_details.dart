@@ -7,8 +7,11 @@ import 'package:social_media/screens/product_zoom.dart';
 import 'package:social_media/widgets/custom.dart';
 import 'package:social_media/widgets/custom_auth.dart';
 import 'package:social_media/widgets/custom_button.dart';
+import '../controllers/api_controllers/sszpayment_controller.dart';
 import '../controllers/auths/firebase_controller.dart';
 import '../controllers/selection_controller.dart';
+
+
 
 class ProductDetails extends StatefulWidget {
   const ProductDetails({super.key});
@@ -19,9 +22,10 @@ class ProductDetails extends StatefulWidget {
 
 class _ProductDetailsState extends State<ProductDetails> {
   late Products products;
-
+  final sszpaymentController=Get.put(SszpaymentController());
   SelectionController selectionController = Get.put(SelectionController());
   FirebaseController firebaseController = Get.put(FirebaseController());
+  //final stripeController=Get.put(StripeController());
   @override
   void initState() {
     super.initState();
@@ -32,12 +36,13 @@ class _ProductDetailsState extends State<ProductDetails> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.white,
+      backgroundColor: Colors.grey.shade300,
       appBar: AppBar(
-        backgroundColor: Colors.white,
+        backgroundColor: Colors.grey.shade300,
         elevation: 0,
         title: null,
         automaticallyImplyLeading: false,
+        scrolledUnderElevation: 0,
       ),
       //order button
       bottomNavigationBar: BottomAppBar(
@@ -211,7 +216,7 @@ class _ProductDetailsState extends State<ProductDetails> {
       backgroundColor: Colors.transparent,
       Container(
         width: double.infinity,
-        height: 580,
+        height: 350,
         decoration: const BoxDecoration(
           color: Colors.white,
           borderRadius: BorderRadius.only(
@@ -317,124 +322,151 @@ class _ProductDetailsState extends State<ProductDetails> {
                         const SizedBox(height: 15),
 
                         /// PAYMENT LOGIC
-                        Obx(() => Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                              children: [
-                                RadioMenuButton<String>(
-                                    value: 'cod',
-                                    groupValue:
-                                        selectionController.paymentMethod.value,
-                                    onChanged: (v) =>
-                                        selectionController.changePayment(v!),
-                                    child: const Text('Cash on Delivery')),
-                                RadioMenuButton<String>(
-                                    value: 'prepaid',
-                                    groupValue:
-                                        selectionController.paymentMethod.value,
-                                    onChanged: (v) =>
-                                        selectionController.changePayment(v!),
-                                    child: const Text('Prepaid Delivery')),
-                              ],
-                            )),
-
-                        Obx(() => selectionController.paymentMethod.value ==
-                                'prepaid'
-                            ? Column(
-                                children: [
-                                  const SizedBox(height: 15),
-                                  Row(
-                                      mainAxisAlignment:
-                                          MainAxisAlignment.center,
-                                      children: [
-                                        GestureDetector(
-                                            onTap: () => selectionController
-                                                .selectProvider('Paypal'),
-                                            child: Container(
-                                                height: 50,
-                                                width: 60,
-                                                decoration: BoxDecoration(
-                                                    color: Colors.blue,
-                                                    borderRadius:
-                                                        BorderRadius.circular(
-                                                            10),
-                                                    border: selectionController
-                                                                .selectedProvider
-                                                                .value ==
-                                                            'Paypal'
-                                                        ? Border.all(
-                                                            color: Colors.black,
-                                                            width: 2)
-                                                        : null),
-                                                child: const Icon(Icons.paypal,
-                                                    color: Colors.white))),
-                                        const SizedBox(width: 70),
-                                        GestureDetector(
-                                            onTap: () => selectionController
-                                                .selectProvider('Binance'),
-                                            child: Container(
-                                                height: 50,
-                                                width: 60,
-                                                decoration: BoxDecoration(
-                                                    color: Colors.orange,
-                                                    borderRadius:
-                                                        BorderRadius.circular(
-                                                            10),
-                                                    border: selectionController
-                                                                .selectedProvider
-                                                                .value ==
-                                                            'Binance'
-                                                        ? Border.all(
-                                                            color: Colors.black,
-                                                            width: 2)
-                                                        : null),
-                                                child: const Icon(
-                                                    Icons.currency_bitcoin,
-                                                    color: Colors.white))),
-                                      ]),
-                                  const SizedBox(height: 15),
-                                  Container(
-                                      width: double.infinity,
-                                      padding: const EdgeInsets.all(12),
-                                      decoration: BoxDecoration(
-                                          color: Colors.green,
-                                          borderRadius:
-                                              BorderRadius.circular(10)),
-                                      child: Text(
-                                          "Account ID: ${selectionController.transactionId.value}",
-                                          style: GoogleFonts.nunito(
-                                              fontWeight: FontWeight.w600,
-                                              color: Colors.white))),
-                                  const SizedBox(height: 15),
-                                  CustomAuth(
-                                      controller:
-                                          firebaseController.cartTransition,
-                                      validator: (v) =>
-                                          v!.isEmpty ? 'Required' : null,
-                                      labelText: 'Transition Id',
-                                      hintText: 'Transition Id',
-                                      prefixIcon: const Icon(
-                                          Icons.monetization_on_outlined,
-                                          color: Colors.grey)),
-                                ],
-                              )
-                            : const SizedBox.shrink()),
+                        /// Binance payment
+                        // Obx(() => Row(
+                        //       mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        //       children: [
+                        //         RadioMenuButton<String>(
+                        //             value: 'cod',
+                        //             groupValue:
+                        //                 selectionController.paymentMethod.value,
+                        //             onChanged: (v) =>
+                        //                 selectionController.changePayment(v!),
+                        //             child: const Text('Cash on Delivery')),
+                        //         RadioMenuButton<String>(
+                        //             value: 'prepaid',
+                        //             groupValue:
+                        //                 selectionController.paymentMethod.value,
+                        //             onChanged: (v) =>
+                        //                 selectionController.changePayment(v!),
+                        //             child: const Text('Prepaid Delivery')),
+                        //       ],
+                        //     )),
+                        //TODO Binance payoneer
+                        // Obx(() => selectionController.paymentMethod.value ==
+                        //         'prepaid'
+                        //     ? Column(
+                        //         children: [
+                        //           const SizedBox(height: 15),
+                        //           Row(
+                        //               mainAxisAlignment:
+                        //                   MainAxisAlignment.center,
+                        //               children: [
+                        //                 GestureDetector(
+                        //                     onTap: () => selectionController
+                        //                         .selectProvider('Paypal'),
+                        //                     child: Container(
+                        //                         height: 50,
+                        //                         width: 60,
+                        //                         decoration: BoxDecoration(
+                        //                             color: Colors.blue,
+                        //                             borderRadius:
+                        //                                 BorderRadius.circular(
+                        //                                     10),
+                        //                             border: selectionController
+                        //                                         .selectedProvider
+                        //                                         .value ==
+                        //                                     'Paypal'
+                        //                                 ? Border.all(
+                        //                                     color: Colors.black,
+                        //                                     width: 2)
+                        //                                 : null),
+                        //                         child: const Icon(Icons.paypal,
+                        //                             color: Colors.white))),
+                        //                 const SizedBox(width: 70),
+                        //                 GestureDetector(
+                        //                     onTap: () => selectionController
+                        //                         .selectProvider('Binance'),
+                        //                     child: Container(
+                        //                         height: 50,
+                        //                         width: 60,
+                        //                         decoration: BoxDecoration(
+                        //                             color: Colors.orange,
+                        //                             borderRadius:
+                        //                                 BorderRadius.circular(
+                        //                                     10),
+                        //                             border: selectionController
+                        //                                         .selectedProvider
+                        //                                         .value ==
+                        //                                     'Binance'
+                        //                                 ? Border.all(
+                        //                                     color: Colors.black,
+                        //                                     width: 2)
+                        //                                 : null),
+                        //                         child: const Icon(
+                        //                             Icons.currency_bitcoin,
+                        //                             color: Colors.white))),
+                        //               ]),
+                        //           const SizedBox(height: 15),
+                        //           Container(
+                        //               width: double.infinity,
+                        //               padding: const EdgeInsets.all(12),
+                        //               decoration: BoxDecoration(
+                        //                   color: Colors.green,
+                        //                   borderRadius:
+                        //                       BorderRadius.circular(10)),
+                        //               child: Text(
+                        //                   "Account ID: ${selectionController.transactionId.value}",
+                        //                   style: GoogleFonts.nunito(
+                        //                       fontWeight: FontWeight.w600,
+                        //                       color: Colors.white))),
+                        //           const SizedBox(height: 15),
+                        //           CustomAuth(
+                        //               controller:
+                        //                   firebaseController.cartTransition,
+                        //               validator: (v) =>
+                        //                   v!.isEmpty ? 'Required' : null,
+                        //               labelText: 'Transition Id',
+                        //               hintText: 'Transition Id',
+                        //               prefixIcon: const Icon(
+                        //                   Icons.monetization_on_outlined,
+                        //                   color: Colors.grey)),
+                        //         ],
+                        //       )
+                        //     : const SizedBox.shrink()),
                       ],
                     ),
                   ),
                 ),
               ),
               CustomButton(
-                  onTap: () {
-                    if (firebaseController.cartKey.currentState!.validate()) {
-                      firebaseController.cartPaymentDetails(
-                          products, selectionController.total.value);
+                onTap: () async {
+                  // 1. Validate Form (City, Road, Phone)
+                  if (firebaseController.cartKey.currentState!.validate()) {
+
+                    // 2. Calculate Total Price
+                    double unitPrice = (products.price ?? 0.0).toDouble();
+                    int quantity = selectionController.total.value;
+                    double finalTotalPrice = unitPrice * quantity;
+
+                    if (finalTotalPrice > 0) {
+                      // 3. Close the bottom sheet immediately
                       Get.back();
-                      Get.snackbar('Success', 'Order created!');
+
+                      // 4. Trigger Stripe Payment
+                      // We multiply by 100 because Stripe expects Cents (e.g. $20.00 = 2000)
+                      int amountInCents = (finalTotalPrice * 100).toInt();
+
+                      sszpaymentController.initiatePayment(finalTotalPrice);
+
+
+                      // await stripeController.makePayment(
+                      //     amount: amountInCents.toString(),
+                      //     currency: "USD"
+                      // );
+
+                      // 5. Optional: If payment is successful, save to Firebase
+                      // You can call this inside your Controller after presentPaymentSheet succeeds
+                      // firebaseController.cartPaymentDetails(products, quantity);
+                    } else {
+                      Get.snackbar("Error", "Total amount must be greater than 0");
                     }
-                  },
-                  color: Colors.blue,
-                  label: 'Confirm',
-                  labelColor: Colors.white),
+                  }
+                },
+                color: Colors.blue,
+                label: 'Confirm & Pay',
+                labelColor: Colors.white,
+              ),
               const SizedBox(height: 20)
             ],
           ),

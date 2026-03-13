@@ -1,3 +1,6 @@
+import 'dart:convert';
+import 'dart:io';
+
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -9,6 +12,7 @@ import 'package:social_media/controllers/nysearch_controller.dart';
 import 'package:social_media/screens/auths/emailverify.dart';
 import 'package:social_media/screens/product_details.dart';
 import '../controllers/auths/firebase_controller.dart';
+import '../controllers/auths/pick_controller.dart';
 import '../controllers/carouselo_controller.dart';
 
 
@@ -26,10 +30,11 @@ class _HomeScreenState extends State<HomeScreen> {
   CarouseloController controller = Get.put(CarouseloController());
   MysearchController mysearchController=Get.put(MysearchController());
   AuthController authController=Get.put(AuthController());
+  final pickController=Get.put(PickController());
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.white,
+      backgroundColor: Colors.grey.shade300,
       body: Column(
         children: [
           Container(
@@ -41,7 +46,7 @@ class _HomeScreenState extends State<HomeScreen> {
                   color: Colors.grey,
                   blurRadius: 10,
                   offset: Offset(0, 5),
-                  spreadRadius: 1,
+                  spreadRadius: 3,
                 )
               ],
               color: Colors.blue,
@@ -80,20 +85,53 @@ class _HomeScreenState extends State<HomeScreen> {
                 ),
 
                 Positioned(
-                  top: 57,
+                  top: 17,
                   left: 25,
                   right: 25,
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                    Obx(()=>  Text(authController.displayUserName.value,
-                        overflow: TextOverflow.ellipsis,
-                        style: GoogleFonts.nunito(
-                          color: Colors.white,
-                          fontSize: 16,
-                          fontWeight: FontWeight.bold,
-                        )),),
-                      const SizedBox(height: 6),
+                     Row(
+                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                       children: [
+                         Obx(()=>  Text(authController.displayUserName.value,
+                             overflow: TextOverflow.ellipsis,
+                             style: GoogleFonts.nunito(
+                               color: Colors.white,
+                               fontSize: 16,
+                               fontWeight: FontWeight.bold,
+                             )),),
+                         Obx(() {
+                           ImageProvider provider;
+
+                           if (pickController.selectedImagePath.value.isNotEmpty) {
+                             provider = FileImage(
+                                 File(pickController.selectedImagePath.value));
+                           }
+
+                           else if (authController.displayUserImage.value.isNotEmpty) {
+                             provider = MemoryImage(
+                                 base64Decode(authController.displayUserImage.value));
+                           }
+
+                           else {
+                             provider = const AssetImage('assets/images/ani.png');
+                           }
+
+                           return Container(
+                             width: 70,
+                             height: 80,
+                             decoration: BoxDecoration(
+                               color: Colors.white,
+                               shape: BoxShape.circle,
+                               border: Border.all(color: Colors.blue, width: 4),
+                               image:
+                               DecorationImage(image: provider, fit: BoxFit.cover),
+                             ),
+                           );
+                         }),
+                       ],
+                     ),
                       Text('Popular Categories',
                           style: GoogleFonts.nunito(
                             color: Colors.white,
@@ -240,14 +278,14 @@ class _HomeScreenState extends State<HomeScreen> {
                   decoration: BoxDecoration(
                     color: controller.selectedPage.value == index
                         ? Colors.blue
-                        : Colors.grey.shade300,
+                        : Colors.grey,
                     borderRadius: BorderRadius.circular(20),
                   ),
                 ),
               ),
             ),
           ),
-          const SizedBox(height: 17,),
+         // const SizedBox(height: 7,),
           Expanded(child: Padding(
             padding: const EdgeInsets.all(8.0),
             child: Obx ((){
@@ -311,7 +349,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                 fontSize: 17,
                               ),
                             ),
-                            const SizedBox(width: 5,),
+                            const SizedBox(width: 6,),
                             Text(product.price?.toString()??'!',
                               overflow: TextOverflow.ellipsis,
                               style: GoogleFonts.nunito(
@@ -323,7 +361,7 @@ class _HomeScreenState extends State<HomeScreen> {
                           ],
                         ),
                       ),
-                      const SizedBox(height: 2,),
+                      const SizedBox(height: 5,),
                       Center(
                         child: Text(product.category??"!",
                           style: GoogleFonts.nunito(
@@ -334,7 +372,7 @@ class _HomeScreenState extends State<HomeScreen> {
                           ),
                         ),
                       ),
-                      const SizedBox(height: 2,),
+                      const SizedBox(height: 6,),
                       //const SizedBox(height: 17,),
                       InkWell(
                         onTap: () {

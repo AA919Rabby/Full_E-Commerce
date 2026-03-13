@@ -23,7 +23,7 @@ class _LoginState extends State<Login> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.white,
+      backgroundColor: Colors.grey.shade300,
       body: SafeArea(
         child: Padding(
           padding: const EdgeInsets.only(left: 15,right: 15),
@@ -168,8 +168,6 @@ class _LoginState extends State<Login> {
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
                       InkWell(
-                          onTap: (){},
-                          child: InkWell(
                             onTap: () async {
 
                               bool success = await authController.signInWithGoogle();
@@ -186,7 +184,7 @@ class _LoginState extends State<Login> {
                                   shape: BoxShape.circle,
                                 ),
                                 child: Image.asset('assets/images/google.png')),
-                          )),
+                          ),
                       const SizedBox(width: 10,),
                       InkWell(
                           onTap: (){},

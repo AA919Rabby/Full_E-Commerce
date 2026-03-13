@@ -23,10 +23,11 @@ class _ProfileChangeState extends State<ProfileChange> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.white,
+      backgroundColor: Colors.grey.shade300,
       appBar: AppBar(
         elevation: 0,
-        backgroundColor: Colors.white,
+        scrolledUnderElevation: 0,
+        backgroundColor: Colors.grey.shade300,
         leading: InkWell(
             onTap: () => Get.back(),
             child: const Icon(Icons.arrow_back, color: Colors.black, size: 25)),

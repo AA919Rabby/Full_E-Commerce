@@ -17,9 +17,9 @@ class _NewAdState extends State<NewAd> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.white,
+      backgroundColor: Colors.grey.shade300,
       appBar: AppBar(
-        backgroundColor: Colors.white,
+        backgroundColor: Colors.grey.shade300,
         elevation: 0,
         scrolledUnderElevation: 0,
         leading: InkWell(

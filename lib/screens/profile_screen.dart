@@ -25,9 +25,10 @@ class _ProfileScreenState extends State<ProfileScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Colors.grey.shade300,
       appBar:
-          AppBar(backgroundColor: Colors.white, elevation: 0, toolbarHeight: 0),
-      backgroundColor: Colors.white,
+          AppBar( backgroundColor: Colors.grey.shade300, elevation: 0, toolbarHeight: 0),
+
       body: SingleChildScrollView(
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
@@ -43,6 +44,14 @@ class _ProfileScreenState extends State<ProfileScreen> {
                     color: Colors.blue,
                     borderRadius: BorderRadius.vertical(
                         bottom: Radius.elliptical(300, 100)),
+                    boxShadow: [
+                      BoxShadow(
+                        color: Colors.grey,
+                        blurRadius: 10,
+                        offset: Offset(0, 5),
+                        spreadRadius: 1,
+                      )
+                    ],
                   ),
                 ),
                 Positioned(

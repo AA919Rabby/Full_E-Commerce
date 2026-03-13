@@ -23,9 +23,9 @@ class _RegisterState extends State<Register> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.white,
+      backgroundColor:Colors.grey.shade300,
       appBar: AppBar(
-        backgroundColor: Colors.white,
+        backgroundColor:Colors.grey.shade300,
         scrolledUnderElevation: 0,
         elevation: 0,
         leading: InkWell(
@@ -208,9 +208,7 @@ class _RegisterState extends State<Register> {
                 Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    InkWell(
-                        onTap: (){},
-                        child: InkWell(
+                   InkWell(
                           onTap: () async {
                             bool success = await authController.signInWithGoogle();
                             if (success) {
@@ -226,7 +224,7 @@ class _RegisterState extends State<Register> {
                                 shape: BoxShape.circle,
                               ),
                               child: Image.asset('assets/images/google.png')),
-                        )),
+                        ),
                     const SizedBox(width: 10,),
                     InkWell(
                         onTap: (){},

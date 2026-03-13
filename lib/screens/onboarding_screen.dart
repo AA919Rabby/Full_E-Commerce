@@ -19,7 +19,7 @@ class OnboardingScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     //Future.microtask(() => authController.checkUser());
     return Scaffold(
-      backgroundColor: Colors.white,
+     backgroundColor:   Colors.grey.shade300,
       body: SafeArea(
         child: Stack(
           children: [

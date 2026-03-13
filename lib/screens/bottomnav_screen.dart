@@ -12,9 +12,8 @@ class BottomnavScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Obx(
           () => Scaffold(
-        backgroundColor: Colors.white,
+        backgroundColor: Colors.grey,
         body: controller.screens[controller.selectedIndex.value],
-
         bottomNavigationBar: BottomNavigationBar(
           currentIndex: controller.selectedIndex.value,
           onTap: controller.changeIndex,

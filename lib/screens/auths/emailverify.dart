@@ -20,7 +20,7 @@ class _EmailverifyState extends State<Emailverify> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.white,
+      backgroundColor:Colors.grey.shade300,
       appBar: AppBar(
         actions: [
           IconButton(onPressed: (){
@@ -28,7 +28,7 @@ class _EmailverifyState extends State<Emailverify> {
           }, icon: Padding(
             padding: const EdgeInsets.only(right: 20,top: 17),
             child: Icon (Icons.close),
-          ),color: Colors.black,),
+          ),color: Colors.grey.shade300,),
         ],
         backgroundColor: Colors.white,
         scrolledUnderElevation: 0,

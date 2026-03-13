@@ -37,6 +37,7 @@ class CustomAuth extends StatelessWidget {
         fontWeight: FontWeight.w500,
       ),
       decoration: InputDecoration(
+        contentPadding: EdgeInsets.only(top: 3),
         labelText: labelText,
         hintText: hintText,
         prefixIcon: prefixIcon,

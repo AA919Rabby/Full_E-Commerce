@@ -14,10 +14,10 @@ class FavouriteScreen extends StatelessWidget {
     String? uid = FirebaseAuth.instance.currentUser?.uid;
 
     return Scaffold(
-      backgroundColor: Colors.white,
+      backgroundColor: Colors.grey.shade300,
       appBar: AppBar(
         scrolledUnderElevation: 0,
-        backgroundColor: Colors.white,
+        backgroundColor: Colors.grey.shade300,
         elevation: 0,
         title: null,
       ),

@@ -18,6 +18,7 @@ class _VerifysuccessState extends State<Verifysuccess> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Colors.grey.shade300,
       body:  SingleChildScrollView(
         child: Center(
           child: Column(

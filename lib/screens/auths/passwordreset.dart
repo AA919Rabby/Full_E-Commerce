@@ -17,7 +17,7 @@ class _PasswordresetState extends State<Passwordreset> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.white,
+      backgroundColor: Colors.grey.shade300,
       appBar: AppBar(
         actions: [
           IconButton(onPressed: (){
@@ -27,7 +27,7 @@ class _PasswordresetState extends State<Passwordreset> {
             child: Icon (Icons.close),
           ),color: Colors.black,),
         ],
-        backgroundColor: Colors.white,
+        backgroundColor:Colors.grey.shade300,
         scrolledUnderElevation: 0,
         elevation: 0,
        automaticallyImplyLeading: false,
