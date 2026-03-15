@@ -5,6 +5,37 @@ A complete E-Commerce mobile application built with Flutter and Firebase with RE
 This app includes product listing, cart system, authentication, and order management.
 
 
+
+# Screenshots
+
+
+[onboarding screen]{Screenshot_20260315_223606.jpg}
+
+
+[intro screen]{Screenshot_20260315_223612.jpg}
+
+
+[auth screen]{Screenshot_20260315_223624.jpg}
+
+
+[home screen]{Screenshot_20260315_223649.jpg}
+
+
+[cart screen]{Screenshot_20260315_223654.jpg}
+
+
+[Screenshot_20260315_223701.jpg]{Screenshot_20260315_223701.jpg}
+
+
+[payment screen]{Screenshot_20260315_223815.jpg}
+
+
+# Demo Video
+
+Youtube  https://youtube.com/shorts/Ar53kwmFhdI?si=9JYnI9OI0lob9nzJ
+
+
+
 # Features
 
 User Authentication (Login / Register / Google sign in)
@@ -52,11 +83,6 @@ GetX (State Management)
 
 Google Fonts
 
-
-
-# Demo Video
-
-Youtube  https://youtube.com/shorts/Ar53kwmFhdI?si=9JYnI9OI0lob9nzJ
 
 
 # Author
