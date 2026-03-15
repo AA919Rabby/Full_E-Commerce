@@ -9,25 +9,25 @@ This app includes product listing, cart system, authentication, and order manage
 # Screenshots
 
 
-[onboarding screen]{Screenshot_20260315_223606.jpg}
+[onboarding screen](Screenshot_20260315_223606.jpg)
 
 
-[intro screen]{Screenshot_20260315_223612.jpg}
+[intro screen](Screenshot_20260315_223612.jpg)
 
 
-[auth screen]{Screenshot_20260315_223624.jpg}
+[auth screen](Screenshot_20260315_223624.jpg)
 
 
-[home screen]{Screenshot_20260315_223649.jpg}
+[home screen](Screenshot_20260315_223649.jpg)
 
 
-[cart screen]{Screenshot_20260315_223654.jpg}
+[cart screen](Screenshot_20260315_223654.jpg)
 
 
-[Screenshot_20260315_223701.jpg]{Screenshot_20260315_223701.jpg}
+[order screen](Screenshot_20260315_223701.jpg)
 
 
-[payment screen]{Screenshot_20260315_223815.jpg}
+[payment screen](Screenshot_20260315_223815.jpg)
 
 
 # Demo Video
