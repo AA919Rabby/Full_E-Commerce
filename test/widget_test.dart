@@ -1,14 +1,11 @@
-import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:social_media/main.dart';
 
 void main() {
-  testWidgets('Counter increments smoke test', (WidgetTester tester) async {
-    // UPDATED: Remove the startScreen argument here
+  testWidgets('App loads smoke test', (WidgetTester tester) async {
+    // This just verifies the app starts up.
+    // Since you use Firebase, the test might still fail if it
+    // tries to reach the network, but this is a better starting point.
     await tester.pumpWidget(const MyApp());
-
-    // Note: Since you are now using Firebase and AuthWrapper, 
-    // this default counter test will likely fail anyway because 
-    // your app doesn't start with a counter anymore.
   });
 }
