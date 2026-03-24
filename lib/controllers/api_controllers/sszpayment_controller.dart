@@ -7,8 +7,8 @@ import '../../screens/payment_web_view_screen.dart';
 class SszpaymentController extends GetxController {
 
   var isLoading = false.obs;
-  final String storeId = "rabby69afc746c7ba3";
-  final String storePassword = "rabby69afc746c7ba3@ssl";
+  final String storeId = "YOUR_STORE_ID";
+  final String storePassword = "YOUR_STORE_PASSWORD";
 
   void initiatePayment(double amount) async {
     isLoading.value = true;
@@ -19,7 +19,7 @@ class SszpaymentController extends GetxController {
       'store_id': storeId,
       'store_passwd': storePassword,
       'total_amount': amount.toStringAsFixed(2),
-      'currency': 'USD',
+      'currency': 'BDT',
       'tran_id': tranId,
       "success_url": "https://sandbox.sslcommerz.com/developer/success.html",
       "fail_url": "https://sandbox.sslcommerz.com/developer/fail.html",
