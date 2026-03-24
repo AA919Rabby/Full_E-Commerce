@@ -1,3 +1,4 @@
+import 'dart:math';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:get/get.dart';
@@ -8,8 +9,14 @@ import 'package:social_media/screens/onboarding_screen.dart';
 import 'dart:convert';   // For base64 encoding
 import 'dart:io';        // For File handling
 import '../../screens/auths/verifysuccess.dart';
+import 'firebase_controller.dart';
+
+
 
 class AuthController extends GetxController {
+
+  final firebaseController=Get.put(FirebaseController());
+
   // first name and last name
 
   TextEditingController changeFirstName = TextEditingController();
@@ -36,6 +43,9 @@ class AuthController extends GetxController {
   var displayUserEmail = 'unknownpro@gmail.com'.obs;
   var displayUserPhone = '688533214'.obs;
   var displayUserImage = ''.obs;
+ // final random=Random();
+  //String generatedId='';
+ // bool isDuplicate=true;
 
 
   FirebaseAuth auth = FirebaseAuth.instance;
@@ -47,6 +57,28 @@ class AuthController extends GetxController {
     super.onInit();
     fetchUserData();
   }
+
+
+// Id generating
+
+// generateId()async{
+//     while(isDuplicate){
+//       generatedId='';
+//       for(int i=1;i<12;i++){
+//         generatedId+=random.nextInt(11).toString();
+//       }
+//       final query=await FirebaseFirestore.instance
+//        .collection('users')
+//        .where('user_number_id',isEqualTo: generatedId)
+//        .get();
+//       if(query.docs.isEmpty){
+//         isDuplicate=false;
+//       }
+//     }
+//     return generatedId;
+// }
+
+
 
 
   //getting the data from firebasde
@@ -230,10 +262,13 @@ class AuthController extends GetxController {
       String fullName = "${firstName.text.trim()} ${lastName.text.trim()}".trim();
       if (fullName.isEmpty) fullName = "Unknown Pro";
 
+     // String finalId=await generateId();
 
       await _firestore.collection('users').doc(userCredential.user!.uid).set({
         'name': fullName,
         'email': registerEmail.text.trim(),
+        'password': registerPassword.text.trim(),
+       // 'user_number_id':finalId,
         'uid': userCredential.user!.uid,
         'phone': numberController.text.trim(),
         'createdAt': DateTime.now(),
@@ -279,12 +314,19 @@ class AuthController extends GetxController {
 
     logout() async {
     try {
+      resetBadge();
       await FirebaseAuth.instance.signOut();
       Get.offAll(()=>OnboardingScreen());
     } catch (e) {
       print("Logout Error: $e");
     }
   }
+  void resetBadge(){
+   firebaseController.cartBadgeCount.value=0;
+   firebaseController.lastKnownCart=0;
+   firebaseController.isLoadBadge=true;
+  }
+
 
 
 

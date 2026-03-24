@@ -4,10 +4,15 @@ import 'package:social_media/screens/cart_screen.dart';
 import 'package:social_media/screens/favourite_screen.dart';
 import 'package:social_media/screens/home_screen.dart';
 import 'package:social_media/screens/profile_screen.dart';
+import 'auths/firebase_controller.dart';
+
 
 class BottomController extends GetxController {
 
+final firebaseController=Get.put(FirebaseController());
+
   var selectedIndex = 0.obs;
+
 
   List<Widget> screens = [
     HomeScreen(),
@@ -26,5 +31,8 @@ class BottomController extends GetxController {
 
    changeIndex(int index) {
     selectedIndex.value = index;
+    if(index==1){
+      firebaseController.clearBadge();
+    }
   }
 }

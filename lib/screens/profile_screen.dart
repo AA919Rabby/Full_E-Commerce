@@ -8,6 +8,7 @@ import 'package:social_media/screens/auths/login.dart';
 import 'package:social_media/screens/cart_screen.dart';
 import 'package:social_media/screens/my_order.dart';
 import 'package:social_media/screens/profile_zoom.dart';
+import '../controllers/auths/firebase_controller.dart';
 import '../controllers/auths/pick_controller.dart';
 
 
@@ -21,7 +22,7 @@ class ProfileScreen extends StatefulWidget {
 class _ProfileScreenState extends State<ProfileScreen> {
   final PickController pickController = Get.put(PickController());
   final AuthController authController = Get.find<AuthController>();
-
+  final firebaseController=Get.put(FirebaseController());
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -132,7 +133,10 @@ class _ProfileScreenState extends State<ProfileScreen> {
                           fontWeight: FontWeight.bold, fontSize: 22)),
                   const SizedBox(height: 12),
                   ListTile(
-                    onTap: () => Get.to(() => CartScreen()),
+                    onTap: (){
+                      firebaseController.clearBadge();
+                      Get.to(()=> CartScreen());
+                    },
                     leading: Image.asset('assets/images/carts.png',
                         color: Colors.blue, height: 30, width: 40),
                     title: Text('My Cart',
@@ -163,8 +167,10 @@ class _ProfileScreenState extends State<ProfileScreen> {
                     onTap: () {
                       Get.defaultDialog(
                         barrierDismissible: false,
-                        title: "Logout?",
+                        title: "Logout ?",
                         middleText: 'Do you want to Logout?',
+                        middleTextStyle: GoogleFonts.nunito(
+                            fontWeight: FontWeight.bold, fontSize: 18),
                         titleStyle: GoogleFonts.nunito(
                             fontWeight: FontWeight.bold, fontSize: 20),
                         radius: 0,

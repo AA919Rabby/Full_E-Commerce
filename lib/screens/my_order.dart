@@ -137,9 +137,10 @@ class MyOrder extends StatelessWidget {
                                 style: GoogleFonts.nunito(fontSize: 14)),
                             Text("Status: ${data['status']}",
                                 style: GoogleFonts.nunito(fontSize: 13,
-                                    color: data['status'] == 'pending' ? Colors.green : Colors.blue)),
-                            Text("Payment: ${data['payment']}",
-                                style: GoogleFonts.nunito(fontSize: 13, color: Colors.grey)),
+                                    color: data['status'].toString().toLowerCase() == 'accepted' ? Colors.green
+                                    :data['status'].toString().toLowerCase()=='pending'?Colors.blue :Colors.red)),
+                            // Text("Payment: ${data['payment']}",
+                            //     style: GoogleFonts.nunito(fontSize: 13, color: Colors.grey)),
                           ],
                         ),
                       ),

@@ -7,12 +7,14 @@ import 'auth_controller.dart';
 import 'package:flutter/material.dart';
 
 
-
 class FirebaseController extends GetxController {
-  SelectionController selectionController = Get.put(SelectionController());
-  AuthController authController = Get.put(AuthController());
+  SelectionController get selectionController => Get.find<SelectionController>();
+  AuthController get authController => Get.find<AuthController>();
   //var cartList=[].obs;
   var isLoading = false.obs;
+  var cartBadgeCount=0.obs;
+  int lastKnownCart=0;
+  bool isLoadBadge=true;
   FirebaseFirestore firestore = FirebaseFirestore.instance;
 
  //from cart order
@@ -28,6 +30,43 @@ class FirebaseController extends GetxController {
   TextEditingController checkRoad=TextEditingController();
   TextEditingController CheckNum=TextEditingController();
   TextEditingController checkTransition=TextEditingController();
+
+
+
+  @override
+  void onInit() {
+    setUpCartBadge();
+    super.onInit();
+  }
+
+
+  void setUpCartBadge(){
+    String? uid=FirebaseAuth.instance.currentUser?.uid;
+    if(uid!=null){
+         FirebaseFirestore.instance
+          .collection('carts')
+          .doc(uid)
+          .collection('items')
+          .snapshots()
+          .listen((snapshot){
+            int currentSize=snapshot.docs.length;
+            if(isLoadBadge){
+              lastKnownCart=currentSize;
+              isLoadBadge=false;
+            }
+            else{
+              if(currentSize > lastKnownCart){
+                // +- additional assignment operator
+                cartBadgeCount.value += (currentSize-lastKnownCart);
+              }
+            }
+            lastKnownCart=currentSize;
+      });
+    }
+  }
+  void clearBadge(){
+    cartBadgeCount.value=0;
+  }
 
 
 
