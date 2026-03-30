@@ -32,7 +32,7 @@ This app includes product listing, cart system, authentication, and order manage
 
 # Demo Video
 
-Youtube  https://youtube.com/shorts/Ar53kwmFhdI?si=9JYnI9OI0lob9nzJ
+Youtube  https://youtu.be/zEOyn0tCKzU?si=tlxmwe8tW78VNaaV
 
 
 
