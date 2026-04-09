@@ -1,9 +1,9 @@
-Full E-Commerce Flutter App
+# Full E-Commerce Flutter App
 A complete E-Commerce mobile application built with Flutter and Firebase with REST Api.
 
 This app includes product listing, cart system, authentication, and order management.
 
-Screenshots
+# Screenshots
 <img src="Screenshot_20260315_223606.jpg" alt="onboarding screen" width="300"/>
 
 <img src="Screenshot_20260315_223612.jpg" alt="intro screen" width="300"/>
@@ -18,10 +18,10 @@ Screenshots
 
 <img src="Screenshot_20260315_223815.jpg" alt="payment screen" width="300"/>
 
-Demo Video
+# Demo Video
 Youtube  https://youtu.be/zEOyn0tCKzU?si=tlxmwe8tW78VNaaV
 
-Features
+# Features
 User Authentication (Login / Register / Google sign in)
 
 Product Listing
@@ -38,7 +38,7 @@ Firebase Integration
 
 Clean & Responsive UI
 
-Tech Stack
+# Tech Stack
 Flutter
 
 Dart
@@ -51,10 +51,10 @@ GetX (State Management)
 
 Google Fonts
 
-Author
-Rabby Khan
+# Author
+ **Rabby Khan**
 
 Flutter Developer
 
-Show Your Support
+# Show Your Support
 If you like this project, please give it a ⭐ on GitHub!
