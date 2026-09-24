@@ -36,31 +36,35 @@ class _ProductDetailsState extends State<ProductDetails> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.grey.shade300,
+      backgroundColor: const Color(0xFFF5F7FA),
       appBar: AppBar(
-        backgroundColor: Colors.grey.shade300,
+        backgroundColor: Colors.white,
         elevation: 0,
         title: null,
         automaticallyImplyLeading: false,
         scrolledUnderElevation: 0,
       ),
-      //order button
       bottomNavigationBar: BottomAppBar(
         color: Colors.white,
-        elevation: 0,
+        elevation: 12,
         child: InkWell(
           onTap: () {
             showOrderSheet();
           },
           child: Container(
-            width: 318,
-            height: 48,
+            height: 60,
             decoration: BoxDecoration(
-              color: Colors.blue,
-              borderRadius: BorderRadius.circular(10),
+              gradient: LinearGradient(
+                colors: [
+                  const Color(0xFF0056D2),
+                  const Color(0xFF0070E8),
+                ],
+              ),
+              borderRadius: BorderRadius.circular(12),
             ),
+            margin: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
             child: Padding(
-              padding: const EdgeInsets.only(left: 70, right: 70),
+              padding: const EdgeInsets.symmetric(horizontal: 24),
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
@@ -70,24 +74,24 @@ class _ProductDetailsState extends State<ProductDetails> {
                         '\$',
                         style: GoogleFonts.nunito(
                             fontSize: 20,
-                            fontWeight: FontWeight.w400,
-                            color: Colors.green[800]),
+                            fontWeight: FontWeight.bold,
+                            color: Colors.white),
                       ),
                       const SizedBox(width: 4),
                       Text(
                         products.price?.toString() ?? '!',
                         style: GoogleFonts.nunito(
-                            fontSize: 18,
-                            fontWeight: FontWeight.w400,
+                            fontSize: 20,
+                            fontWeight: FontWeight.bold,
                             color: Colors.white),
                       ),
                     ],
                   ),
                   Text(
-                    'Order now !',
+                    'Order now',
                     style: GoogleFonts.nunito(
-                        fontSize: 20,
-                        fontWeight: FontWeight.w400,
+                        fontSize: 18,
+                        fontWeight: FontWeight.w600,
                         color: Colors.white),
                   ),
                 ],
@@ -102,106 +106,148 @@ class _ProductDetailsState extends State<ProductDetails> {
             children: [
               Padding(
                 padding:
-                    const EdgeInsets.symmetric(horizontal: 25, vertical: 10),
+                    const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    InkWell(
+                    GestureDetector(
                       onTap: () => Get.back(),
-                      child: const Icon(Icons.arrow_back, color: Colors.black),
+                      child: Container(
+                        padding: const EdgeInsets.all(10),
+                        decoration: BoxDecoration(
+                          color: Colors.white,
+                          borderRadius: BorderRadius.circular(10),
+                          boxShadow: [
+                            BoxShadow(
+                              color: Colors.black.withOpacity(0.06),
+                              blurRadius: 8,
+                              offset: const Offset(0, 2),
+                            )
+                          ],
+                        ),
+                        child: const Icon(Icons.arrow_back,
+                            color: Colors.black, size: 24),
+                      ),
                     ),
-                    InkWell(
+                    GestureDetector(
                         onTap: () {
-                          //adding product to favscreen
                           firebaseController.addFav(products);
-                          Get.back();
                           Get.snackbar('Success',
-                              '${products.title} added to favourites');
+                              '${products.title} added to favourites',
+                              backgroundColor: const Color(0xFF0056D2),
+                              colorText: Colors.white);
                         },
-                        child: Icon(
-                          Icons.favorite_outline_rounded,
-                          color: Colors.red,
+                        child: Container(
+                          padding: const EdgeInsets.all(10),
+                          decoration: BoxDecoration(
+                            color: Colors.red.withOpacity(0.1),
+                            borderRadius: BorderRadius.circular(10),
+                            boxShadow: [
+                              BoxShadow(
+                                color: Colors.black.withOpacity(0.06),
+                                blurRadius: 8,
+                                offset: const Offset(0, 2),
+                              )
+                            ],
+                          ),
+                          child: Icon(
+                            Icons.favorite_outline_rounded,
+                            color: Colors.red,
+                            size: 24,
+                          ),
                         ))
                   ],
                 ),
               ),
 
-              // Product Images
-              Center(
-                child: SizedBox(
-                  height: 250,
-                  child: ListView.builder(
-                    scrollDirection: Axis.horizontal,
-                    itemCount: products.images?.length ?? 0,
-                    itemBuilder: (context, index) {
-                      return GestureDetector(
-                        onTap: () =>
-                            Get.to(() => ProductZoom(), arguments: products),
-                        child: Container(
-                          width: MediaQuery.of(context).size.width,
-                          child: Image.network(products.images![index],
-                              fit: BoxFit.contain),
-                        ),
-                      );
-                    },
+               // Product Images
+               Container(
+                 color: Colors.white,
+                 child: Center(
+                   child: SizedBox(
+                     height: 260,
+                     child: ListView.builder(
+                       scrollDirection: Axis.horizontal,
+                       itemCount: products.images?.length ?? 0,
+                       itemBuilder: (context, index) {
+                         return GestureDetector(
+                           onTap: () =>
+                               Get.to(() => ProductZoom(), arguments: products),
+                           child: Container(
+                             width: MediaQuery.of(context).size.width,
+                             color: const Color(0xFFF5F7FA),
+                             child: Image.network(products.images![index],
+                                 fit: BoxFit.contain),
+                           ),
+                         );
+                       },
+                     ),
+                   ),
+                 ),
+               ),
+
+               const SizedBox(height: 24),
+               Padding(
+                 padding: const EdgeInsets.symmetric(horizontal: 20),
+                 child: Column(
+                   crossAxisAlignment: CrossAxisAlignment.start,
+                   children: [
+                     Text(
+                       products.title ?? "!",
+                       style: GoogleFonts.nunito(
+                           fontSize: 24,
+                           fontWeight: FontWeight.bold,
+                           color: Colors.black),
+                     ),
+                     const SizedBox(height: 16),
+
+                     Row(
+                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                       children: [
+                         Container(
+                           padding: const EdgeInsets.symmetric(
+                               horizontal: 14, vertical: 8),
+                           decoration: BoxDecoration(
+                             color: const Color(0xFF0056D2).withOpacity(0.1),
+                             borderRadius: BorderRadius.circular(10),
+                           ),
+                           child: Text(
+                             products.category ?? '!',
+                             style: GoogleFonts.nunito(
+                                 fontSize: 13,
+                                 fontWeight: FontWeight.w600,
+                                 color: const Color(0xFF0056D2)),
+                           ),
+                         ),
+                         Container(
+                           padding: const EdgeInsets.symmetric(
+                               horizontal: 12, vertical: 6),
+                           decoration: BoxDecoration(
+                             color: const Color(0xFF1CB127).withOpacity(0.1),
+                             borderRadius: BorderRadius.circular(8),
+                           ),
+                           child: Row(
+                             children: [
+                               const Icon(Icons.check_circle,
+                                   size: 14,
+                                   color: Color(0xFF1CB127)),
+                               const SizedBox(width: 4),
+                               Text('Stock: ${products.stock ?? 0}',
+                                   style: GoogleFonts.nunito(
+                                       fontSize: 13,
+                                       fontWeight: FontWeight.w600,
+                                       color: const Color(0xFF1CB127))),
+                             ],
+                           ),
+                         )
+                       ],
+                      ),
+                      const SizedBox(height: 20),
+                    ],
                   ),
-                ),
-              ),
+                 ),
 
-              const SizedBox(height: 20),
-              Text(
-                products.title ?? "!",
-                textAlign: TextAlign.center,
-                style: GoogleFonts.nunito(
-                    fontSize: 22,
-                    fontWeight: FontWeight.bold,
-                    color: Colors.black),
-              ),
-              const SizedBox(height: 15),
 
-              Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 30),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    Container(
-                      padding: const EdgeInsets.symmetric(
-                          horizontal: 12, vertical: 6),
-                      decoration: BoxDecoration(
-                        color: Colors.blue,
-                        borderRadius: BorderRadius.circular(10),
-                      ),
-                      child: Text(
-                        products.category ?? '!',
-                        style: GoogleFonts.nunito(
-                            fontSize: 15,
-                            fontWeight: FontWeight.w400,
-                            color: Colors.white),
-                      ),
-                    ),
-                    Row(
-                      children: [
-                        Text('Stock: ',
-                            style: GoogleFonts.nunito(fontSize: 15)),
-                        Text(
-                          products.stock?.toString() ?? '!',
-                          style: GoogleFonts.nunito(
-                              fontSize: 15, fontWeight: FontWeight.bold),
-                        ),
-                      ],
-                    )
-                  ],
-                ),
-              ),
-              const SizedBox(height: 20),
-              Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 16),
-                child: Text(
-                  products.description ?? "!",
-                  style:
-                      GoogleFonts.nunito(fontSize: 16, color: Colors.grey[700]),
-                ),
-              ),
             ],
           ),
         ),
@@ -209,37 +255,35 @@ class _ProductDetailsState extends State<ProductDetails> {
     );
   }
 
-  //bottomSheet
   showOrderSheet() {
     Get.bottomSheet(
       isScrollControlled: true,
       backgroundColor: Colors.transparent,
       Container(
         width: double.infinity,
-        height: 350,
         decoration: const BoxDecoration(
           color: Colors.white,
           borderRadius: BorderRadius.only(
-            topLeft: Radius.circular(25),
-            topRight: Radius.circular(25),
+            topLeft: Radius.circular(28),
+            topRight: Radius.circular(28),
           ),
         ),
         child: Form(
           key: firebaseController.cartKey,
           child: Column(
             children: [
-              const SizedBox(height: 12),
+              const SizedBox(height: 16),
               Container(
                   width: 50,
                   height: 5,
                   decoration: BoxDecoration(
-                      color: Colors.grey.withOpacity(0.5),
+                      color: Colors.grey.shade300,
                       borderRadius: BorderRadius.circular(30))),
               Expanded(
                 child: SingleChildScrollView(
                   child: Padding(
                     padding:
-                        const EdgeInsets.only(top: 20, left: 20, right: 20),
+                        const EdgeInsets.only(top: 24, left: 20, right: 20),
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [

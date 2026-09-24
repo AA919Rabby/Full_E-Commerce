@@ -5,11 +5,8 @@ import 'package:social_media/screens/splash/unified_splash.dart';
 import '../controllers/auths/auth_controller.dart';
 import '../controllers/onboarding_controller.dart';
 
-
 class OnboardingScreen extends StatelessWidget {
   OnboardingScreen({super.key});
-
-  //final authController = Get.put(AuthController());
 
   final OnboardingController _controller = Get.put(OnboardingController());
 
@@ -17,9 +14,8 @@ class OnboardingScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    //Future.microtask(() => authController.checkUser());
     return Scaffold(
-     backgroundColor:   Colors.grey.shade300,
+     backgroundColor: const Color(0xFFF5F7FA),
       body: SafeArea(
         child: Stack(
           children: [
@@ -114,9 +110,9 @@ class OnboardingScreen extends StatelessWidget {
                   ),
                   const SizedBox(height: 150),
                   // Button
-                  SizedBox(
+                   SizedBox(
                     width: double.infinity,
-                    height: 50,
+                    height: 54,
                     child: ElevatedButton(
                       onPressed: () {
                         if (_controller.selectedPage.value ==
@@ -131,8 +127,9 @@ class OnboardingScreen extends StatelessWidget {
                       },
                       style: ElevatedButton.styleFrom(
                         backgroundColor: const Color(0xFF0056D2),
+                        elevation: 8,
                         shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(10),
+                          borderRadius: BorderRadius.circular(14),
                         ),
                       ),
                       child: Obx(() => Text(
@@ -141,7 +138,7 @@ class OnboardingScreen extends StatelessWidget {
                             ? "Get Started"
                             : "Next",
                         style: GoogleFonts.nunito(
-                          fontSize: 16,
+                          fontSize: 18,
                           fontWeight: FontWeight.bold,
                           color: Colors.white,
                         ),

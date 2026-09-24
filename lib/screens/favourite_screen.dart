@@ -14,12 +14,19 @@ class FavouriteScreen extends StatelessWidget {
     String? uid = FirebaseAuth.instance.currentUser?.uid;
 
     return Scaffold(
-      backgroundColor: Colors.grey.shade300,
+      backgroundColor: const Color(0xFFF5F7FA),
       appBar: AppBar(
         scrolledUnderElevation: 0,
-        backgroundColor: Colors.grey.shade300,
+        backgroundColor: Colors.white,
         elevation: 0,
-        title: null,
+        title: Text(
+          'My Favorites',
+          style: GoogleFonts.nunito(
+            fontSize: 22,
+            fontWeight: FontWeight.bold,
+            color: Colors.black,
+          ),
+        ),
       ),
       body: StreamBuilder<QuerySnapshot>(
         stream: FirebaseFirestore.instance
@@ -69,17 +76,17 @@ class FavouriteScreen extends StatelessWidget {
                       child: Padding(
                         padding: const EdgeInsets.only(left: 20, right: 20),
                         child: Container(
-                          margin: const EdgeInsets.only(bottom: 10),
-                          height: 100,
+                          margin: const EdgeInsets.only(bottom: 12),
+                          height: 120,
                           decoration: BoxDecoration(
                               color: Colors.white,
-                              borderRadius: BorderRadius.circular(10),
+                              borderRadius: BorderRadius.circular(14),
                               boxShadow: [
                                 BoxShadow(
                                   color: Colors.black.withOpacity(0.06),
-                                  spreadRadius: 3,
-                                  blurRadius: 3,
-                                  offset: const Offset(0, 3),
+                                  spreadRadius: 2,
+                                  blurRadius: 8,
+                                  offset: const Offset(0, 2),
                                 )
                               ]),
                           child: Center(
